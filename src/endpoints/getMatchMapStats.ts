@@ -431,7 +431,10 @@ export function getPlayerStats(m$: HLTVPage, p$: HLTVPage) {
       },
       kills: el.find('.st-kills').contents().first().numFromText()!,
       hsKills: Number(
-        el.find('.st-kills .gtSmartphone-only').text().replace(/[()]/g, '')
+        el
+          .find('.st-kills.traditional-data .gtSmartphone-only')
+          .text()
+          .replace(/[()]/g, '')
       ),
       assists: el.find('.st-assists').contents().first().numFromText()!,
       flashAssists: Number(
@@ -439,7 +442,10 @@ export function getPlayerStats(m$: HLTVPage, p$: HLTVPage) {
       ),
       deaths: el.find('.st-deaths').contents().first().numFromText()!,
       deathsTraded: Number(
-        el.find('.st-deaths .gtSmartphone-only').text().replace(/[()]/g, '')
+        el
+          .find('.st-deaths.traditional-data .gtSmartphone-only')
+          .text()
+          .replace(/[()]/g, '')
       ),
       openingKills: Number(el.find('.st-opkd').text().split(' : ')[0]),
       openingDeaths: Number(el.find('.st-opkd').text().split(' : ')[1]),
