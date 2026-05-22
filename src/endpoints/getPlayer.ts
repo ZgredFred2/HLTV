@@ -47,7 +47,7 @@ export const getPlayer =
   async ({ id }: { id: number }): Promise<FullPlayer> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/player/${id}/${generateRandomSuffix()}`,
+        `https://www.hltv.org/player/${id}/${generateRandomSuffix(id)}`,
         config.loadPage
       )
     )

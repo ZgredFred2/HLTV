@@ -21,7 +21,7 @@ export const getStreams =
   (config: HLTVConfig) => async (): Promise<FullStream[]> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/${generateRandomSuffix()}`,
+        `https://www.hltv.org/${generateRandomSuffix(0)}`,
         config.loadPage
       )
     )

@@ -206,7 +206,7 @@ export const connectToScorebot =
     onDisconnect
   }: ConnectToScorebotParams) => {
     fetchPage(
-      `https://www.hltv.org/matches/${id}/${generateRandomSuffix()}`,
+      `https://www.hltv.org/matches/${id}/${generateRandomSuffix(id)}`,
       config.loadPage
     ).then(($) => {
       const url = $('#scoreboardElement')

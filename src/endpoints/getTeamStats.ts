@@ -116,7 +116,7 @@ export const getTeamStats =
           ? `https://www.hltv.org/stats/lineup/matches?${currentRosterQuery}&${query}`
           : `https://www.hltv.org/stats/teams/matches/${
               options.id
-            }/${generateRandomSuffix()}?${query}`,
+            }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper),
       fetchPage(
@@ -124,7 +124,7 @@ export const getTeamStats =
           ? `https://www.hltv.org/stats/lineup/events?${currentRosterQuery}&${query}`
           : `https://www.hltv.org/stats/teams/events/${
               options.id
-            }/${generateRandomSuffix()}?${query}`,
+            }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper),
       fetchPage(
@@ -132,7 +132,7 @@ export const getTeamStats =
           ? `https://www.hltv.org/stats/lineup/maps?${currentRosterQuery}&${query}`
           : `https://www.hltv.org/stats/teams/maps/${
               options.id
-            }/${generateRandomSuffix()}?${query}`,
+            }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper)
     ])

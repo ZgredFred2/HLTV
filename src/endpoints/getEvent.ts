@@ -63,7 +63,7 @@ export const getEvent =
   async ({ id }: { id: number }): Promise<FullEvent> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/events/${id}/${generateRandomSuffix()}`,
+        `https://www.hltv.org/events/${id}/${generateRandomSuffix(id)}`,
         config.loadPage
       )
     )

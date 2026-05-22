@@ -108,7 +108,7 @@ export const getMatch =
   async ({ id }: { id: number }): Promise<FullMatch> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/matches/${id}/${generateRandomSuffix()}`,
+        `https://www.hltv.org/matches/${id}/${generateRandomSuffix(id)}`,
         config.loadPage
       )
     )

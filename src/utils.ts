@@ -1,5 +1,18 @@
 import * as cheerio from 'cheerio'
-import { randomUUID } from 'crypto'
+import { createHash, randomUUID } from 'crypto'
+
+/** https://stackoverflow.com/a/79473259 */
+function seededUUID(seed: string): string {
+  const hash = createHash('sha256').update(seed).digest('hex')
+
+  return [
+    hash.substring(0, 8),
+    hash.substring(8, 12),
+    '4' + hash.substring(12, 15), // Set the version to 4
+    '8' + hash.substring(15, 18), // Set the variant to 8 (RFC 4122)
+    hash.substring(18, 30)
+  ].join('-')
+}
 
 export const fetchPage = async (
   url: string,
@@ -23,8 +36,9 @@ export const fetchPage = async (
   return root
 }
 
-export const generateRandomSuffix = () => {
-  return randomUUID()
+export const generateRandomSuffix = (seed?: string | number) => {
+  if (seed === undefined) return randomUUID()
+  return seededUUID(String(seed))
 }
 
 export const percentageToDecimalOdd = (odd: number): number =>

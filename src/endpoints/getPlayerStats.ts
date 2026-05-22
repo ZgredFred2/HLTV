@@ -99,19 +99,19 @@ export const getPlayerStats =
       fetchPage(
         `https://www.hltv.org/stats/players/${
           options.id
-        }/${generateRandomSuffix()}?${query}`,
+        }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/players/individual/${
           options.id
-        }/${generateRandomSuffix()}?${query}`,
+        }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/players/matches/${
           options.id
-        }/${generateRandomSuffix()}?${query}`,
+        }/${generateRandomSuffix(options.id)}?${query}`,
         config.loadPage
       ).then(HLTVScraper)
     ])

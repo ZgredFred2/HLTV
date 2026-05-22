@@ -19,7 +19,7 @@ export const getRecentThreads =
   (config: HLTVConfig) => async (): Promise<Thread[]> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/${generateRandomSuffix()}`,
+        `https://www.hltv.org/${generateRandomSuffix(0)}`,
         config.loadPage
       )
     )

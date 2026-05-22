@@ -37,7 +37,7 @@ export const getTeam =
   async ({ id }: { id: number }): Promise<FullTeam> => {
     const $ = HLTVScraper(
       await fetchPage(
-        `https://www.hltv.org/team/${id}/${generateRandomSuffix()}`,
+        `https://www.hltv.org/team/${id}/${generateRandomSuffix(id)}`,
         config.loadPage
       )
     )
