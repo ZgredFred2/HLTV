@@ -85,6 +85,7 @@ export const getResults =
     let page = 0
     let $: HLTVPage
     let results: FullMatchResult[] = []
+    let hasNextPage: boolean
 
     do {
       await sleep(options.delayBetweenPageRequests ?? 0)
@@ -98,7 +99,9 @@ export const getResults =
 
       page++
 
-      $('.result-con:not(.big-results .result-con)').each((i, el) => {
+      const $results = $('.result-con:not(.big-results .result-con)')
+      hasNextPage = $results.exists()
+      $results.each((i, el) => {
         const id = el.find('a').first().attrThen('href', getIdAt(2))!
         const stars = el.find('.stars i').length
         const date = el.numFromAttr('data-zonedgrouping-entry-unix')!
@@ -137,7 +140,8 @@ export const getResults =
             : { map: fromMapSlug(format), format: 'bo1' })
         })
       })
-    } while ($('.result-con:not(.big-results .result-con)').exists())
+
+    } while (hasNextPage)
 
     return results
   }
