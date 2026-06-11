@@ -34,15 +34,17 @@ export interface FullMatchStats {
 
 export const getMatchStats =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullMatchStats> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullMatchStats> => {
     const [m$, p$] = await Promise.all([
       fetchPage(
         `https://www.hltv.org/stats/matches/${id}/-`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/matches/performance/${id}/-`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper)
     ])
 

@@ -114,15 +114,17 @@ interface PlayerCard {
 
 export const getMatchMapStats =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullMatchMapStats> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullMatchMapStats> => {
     const [m$, p$] = await Promise.all([
       fetchPage(
         `https://www.hltv.org/stats/matches/mapstatsid/${id}/-`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/matches/performance/mapstatsid/${id}/-`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper)
     ])
 

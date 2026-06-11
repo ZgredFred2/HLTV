@@ -105,11 +105,12 @@ export interface FullMatch {
 
 export const getMatch =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullMatch> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullMatch> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/matches/${id}/${generateRandomSuffix(id)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

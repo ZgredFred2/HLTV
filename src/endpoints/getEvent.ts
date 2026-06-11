@@ -60,11 +60,12 @@ export interface FullEvent {
 
 export const getEvent =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullEvent> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullEvent> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/events/${id}/${generateRandomSuffix(id)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

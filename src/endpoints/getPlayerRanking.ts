@@ -33,7 +33,7 @@ export interface GetPlayerRankingOptions {
 
 export const getPlayerRanking =
   (config: HLTVConfig) =>
-  async (options: GetPlayerRankingOptions = {}): Promise<PlayerRanking[]> => {
+  async (options: GetPlayerRankingOptions = {}, fetchOptions?: Partial<RequestInit>): Promise<PlayerRanking[]> => {
     const query = stringify({
       ...(options.startDate ? { startDate: options.startDate } : {}),
       ...(options.endDate ? { endDate: options.endDate } : {}),
@@ -50,7 +50,8 @@ export const getPlayerRanking =
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/stats/players?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

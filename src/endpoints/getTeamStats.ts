@@ -60,7 +60,7 @@ export interface GetTeamStatsArguments {
 
 export const getTeamStats =
   (config: HLTVConfig) =>
-  async (options: GetTeamStatsArguments): Promise<FullTeamStats> => {
+  async (options: GetTeamStatsArguments, fetchOptions?: Partial<RequestInit>): Promise<FullTeamStats> => {
     const query = stringify({
       ...(options.startDate ? { startDate: options.startDate } : {}),
       ...(options.endDate ? { endDate: options.endDate } : {}),
@@ -75,7 +75,8 @@ export const getTeamStats =
     let $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/stats/teams/${options.id}/-?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 
@@ -95,7 +96,8 @@ export const getTeamStats =
       $ = HLTVScraper(
         await fetchPage(
           `https://www.hltv.org/stats/lineup?${currentRosterQuery}`,
-          config.loadPage
+          config.loadPage,
+          fetchOptions
         )
       )
     }
@@ -117,7 +119,8 @@ export const getTeamStats =
           : `https://www.hltv.org/stats/teams/matches/${
               options.id
             }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         options.currentRosterOnly
@@ -125,7 +128,8 @@ export const getTeamStats =
           : `https://www.hltv.org/stats/teams/events/${
               options.id
             }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         options.currentRosterOnly
@@ -133,7 +137,8 @@ export const getTeamStats =
           : `https://www.hltv.org/stats/teams/maps/${
               options.id
             }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper)
     ])
 

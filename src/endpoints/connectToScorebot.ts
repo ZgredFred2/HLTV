@@ -204,10 +204,11 @@ export const connectToScorebot =
     onFullLogUpdate,
     onConnect,
     onDisconnect
-  }: ConnectToScorebotParams) => {
+  }: ConnectToScorebotParams, fetchOptions?: Partial<RequestInit>) => {
     fetchPage(
       `https://www.hltv.org/matches/${id}/${generateRandomSuffix(id)}`,
-      config.loadPage
+      config.loadPage,
+      fetchOptions
     ).then(($) => {
       const url = $('#scoreboardElement')
         .attr('data-scorebot-url')!

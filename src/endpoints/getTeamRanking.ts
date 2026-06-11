@@ -32,7 +32,7 @@ export interface GetTeamArguments {
 
 export const getTeamRanking =
   (config: HLTVConfig) =>
-  async ({ year, month, day, country }: GetTeamArguments = {}): Promise<
+  async ({ year, month, day, country }: GetTeamArguments = {}, fetchOptions?: Partial<RequestInit>): Promise<
     TeamRanking[]
   > => {
     let $ = HLTVScraper(
@@ -40,7 +40,8 @@ export const getTeamRanking =
         `https://www.hltv.org/ranking/teams/${year ?? ''}/${month ?? ''}/${
           day ?? ''
         }`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 
@@ -55,7 +56,8 @@ export const getTeamRanking =
       $ = HLTVScraper(
         await fetchPage(
           `https://www.hltv.org/${countryRankingLink}`,
-          config.loadPage
+          config.loadPage,
+          fetchOptions
         )
       )
     }

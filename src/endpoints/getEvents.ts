@@ -26,7 +26,7 @@ export interface GetEventsArguments {
 
 export const getEvents =
   (config: HLTVConfig) =>
-  async (options: GetEventsArguments = {}): Promise<EventPreview[]> => {
+  async (options: GetEventsArguments = {}, fetchOptions?: Partial<RequestInit>): Promise<EventPreview[]> => {
     const query = stringify({
       ...(options.eventType ? { eventType: options.eventType } : {}),
       ...(options.prizePoolMin ? { prizeMin: options.prizePoolMin } : {}),
@@ -38,7 +38,7 @@ export const getEvents =
     })
 
     const $ = HLTVScraper(
-      await fetchPage(`https://www.hltv.org/events?${query}`, config.loadPage)
+      await fetchPage(`https://www.hltv.org/events?${query}`, config.loadPage, fetchOptions)
     )
 
     const featuredOngoingEvents = $(

@@ -44,11 +44,12 @@ export interface FullPlayer {
 
 export const getPlayer =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullPlayer> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullPlayer> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/player/${id}/${generateRandomSuffix(id)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

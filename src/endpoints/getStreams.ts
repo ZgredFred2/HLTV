@@ -18,11 +18,12 @@ export interface FullStream {
 }
 
 export const getStreams =
-  (config: HLTVConfig) => async (): Promise<FullStream[]> => {
+  (config: HLTVConfig) => async (fetchOptions?: Partial<RequestInit>): Promise<FullStream[]> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/${generateRandomSuffix(0)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

@@ -50,7 +50,7 @@ export interface GetNewsArguments {
 
 export const getNews =
   (config: HLTVConfig) =>
-  async ({ year, month, eventIds }: GetNewsArguments = {}): Promise<
+  async ({ year, month, eventIds }: GetNewsArguments = {}, fetchOptions?: Partial<RequestInit>): Promise<
     NewsPreview[]
   > => {
     let url = 'https://www.hltv.org/news/archive'
@@ -61,7 +61,7 @@ export const getNews =
       url = `${url}/${year}/${month}`
     }
 
-    const $ = HLTVScraper(await fetchPage(url, config.loadPage))
+    const $ = HLTVScraper(await fetchPage(url, config.loadPage, fetchOptions))
 
     const news = $('.article')
       .toArray()

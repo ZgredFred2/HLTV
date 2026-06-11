@@ -16,9 +16,10 @@ function seededUUID(seed: string): string {
 
 export const fetchPage = async (
   url: string,
-  loadPage: (url: string) => Promise<string>
+  loadPage: (url: string, fetchOptions?: Partial<RequestInit>) => Promise<string>,
+  fetchOptions?: Partial<RequestInit>
 ): Promise<cheerio.Root> => {
-  const root = cheerio.load(await loadPage(url))
+  const root = cheerio.load(await loadPage(url, fetchOptions))
 
   const html = root.html()
 

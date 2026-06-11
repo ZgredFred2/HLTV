@@ -29,7 +29,7 @@ export interface GetPastEventsArguments {
 
 export const getPastEvents =
   (config: HLTVConfig) =>
-  async (options: GetPastEventsArguments): Promise<PastEventPreview[]> => {
+  async (options: GetPastEventsArguments, fetchOptions?: Partial<RequestInit>): Promise<PastEventPreview[]> => {
     const query = stringify({
       ...(options.startDate ? { startDate: options.startDate } : {}),
       ...(options.endDate ? { endDate: options.endDate } : {}),
@@ -52,7 +52,8 @@ export const getPastEvents =
       $ = HLTVScraper(
         await fetchPage(
           `https://www.hltv.org/events/archive?${query}&offset=${page * 50}`,
-          config.loadPage
+          config.loadPage,
+          fetchOptions
         )
       )
 

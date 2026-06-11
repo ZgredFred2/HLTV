@@ -34,7 +34,7 @@ export const getMatchesStats =
   (config: HLTVConfig) =>
   async (
     options: GetMatchesStatsArguments = {}
-  ): Promise<MatchStatsPreview[]> => {
+  , fetchOptions?: Partial<RequestInit>): Promise<MatchStatsPreview[]> => {
     const query = stringify({
       ...(options.startDate ? { startDate: options.startDate } : {}),
       ...(options.endDate ? { endDate: options.endDate } : {}),
@@ -53,7 +53,8 @@ export const getMatchesStats =
       $ = HLTVScraper(
         await fetchPage(
           `https://www.hltv.org/stats/matches?${query}&offset=${page * 50}`,
-          config.loadPage
+          config.loadPage,
+          fetchOptions
         )
       )
 

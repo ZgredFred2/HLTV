@@ -16,11 +16,12 @@ export interface Thread {
 }
 
 export const getRecentThreads =
-  (config: HLTVConfig) => async (): Promise<Thread[]> => {
+  (config: HLTVConfig) => async (fetchOptions?: Partial<RequestInit>): Promise<Thread[]> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/${generateRandomSuffix(0)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

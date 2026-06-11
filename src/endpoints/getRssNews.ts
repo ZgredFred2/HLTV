@@ -15,9 +15,9 @@ const urlify = (text: string) => {
 }
 
 export const getRssNews =
-  (config: HLTVConfig) => async (): Promise<RssArticle[]> => {
+  (config: HLTVConfig) => async (fetchOptions?: Partial<RequestInit>): Promise<RssArticle[]> => {
     const url = 'https://www.hltv.org/rss/news'
-    const $ = HLTVScraper(await fetchPage(url, config.loadPage))
+    const $ = HLTVScraper(await fetchPage(url, config.loadPage, fetchOptions))
     return $('item')
       .toArray()
       .map((el) => {

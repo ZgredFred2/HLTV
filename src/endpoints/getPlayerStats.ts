@@ -82,7 +82,7 @@ export interface GetPlayerStatsArguments {
 
 export const getPlayerStats =
   (config: HLTVConfig) =>
-  async (options: GetPlayerStatsArguments): Promise<FullPlayerStats> => {
+  async (options: GetPlayerStatsArguments, fetchOptions?: Partial<RequestInit>): Promise<FullPlayerStats> => {
     const query = stringify({
       ...(options.startDate ? { startDate: options.startDate } : {}),
       ...(options.endDate ? { endDate: options.endDate } : {}),
@@ -100,19 +100,22 @@ export const getPlayerStats =
         `https://www.hltv.org/stats/players/${
           options.id
         }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/players/individual/${
           options.id
         }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper),
       fetchPage(
         `https://www.hltv.org/stats/players/matches/${
           options.id
         }/${generateRandomSuffix(options.id)}?${query}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       ).then(HLTVScraper)
     ])
 

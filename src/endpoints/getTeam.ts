@@ -34,11 +34,12 @@ export interface FullTeam {
 
 export const getTeam =
   (config: HLTVConfig) =>
-  async ({ id }: { id: number }): Promise<FullTeam> => {
+  async ({ id }: { id: number }, fetchOptions?: Partial<RequestInit>): Promise<FullTeam> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/team/${id}/${generateRandomSuffix(id)}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
 

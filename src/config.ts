@@ -3,13 +3,13 @@ import { Agent as HttpAgent } from 'http'
 import { gotScraping } from 'got-scraping'
 
 export interface HLTVConfig {
-  loadPage: (url: string) => Promise<string>
+  loadPage: (url: string, fetchOptions?: Partial<RequestInit>) => Promise<string>
   httpAgent: HttpsAgent | HttpAgent
 }
 
 export const defaultLoadPage =
-  (httpAgent: HttpsAgent | HttpAgent | undefined) => (url: string) =>
-    gotScraping({ url, agent: { http: httpAgent, https: httpAgent } }).then(
+  (httpAgent: HttpsAgent | HttpAgent | undefined) => (url: string, fetchOptions?: Partial<RequestInit>) =>
+    gotScraping({ url, agent: { http: httpAgent, https: httpAgent }, ...fetchOptions }).then(
       (res: { body: any }) => res.body
     )
 

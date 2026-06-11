@@ -43,7 +43,7 @@ export const getMatches =
     eventType,
     filter,
     teamIds
-  }: GetMatchesArguments = {}): Promise<MatchPreview[]> => {
+  }: GetMatchesArguments = {}, fetchOptions?: Partial<RequestInit>): Promise<MatchPreview[]> => {
     const query = stringify({
       ...(eventIds ? { event: eventIds } : {}),
       ...(eventType ? { eventType } : {}),
@@ -52,7 +52,7 @@ export const getMatches =
     })
 
     const $ = HLTVScraper(
-      await fetchPage(`https://www.hltv.org/matches?${query}`, config.loadPage)
+      await fetchPage(`https://www.hltv.org/matches?${query}`, config.loadPage, fetchOptions)
     )
     // all live matches
     const liveMatches = $('.liveMatches > .match-wrapper')

@@ -5,11 +5,12 @@ import { fetchPage } from '../utils'
 
 export const getTeamByName =
   (config: HLTVConfig) =>
-  async ({ name }: { name: string }): Promise<FullTeam> => {
+  async ({ name }: { name: string }, fetchOptions?: Partial<RequestInit>): Promise<FullTeam> => {
     const $ = HLTVScraper(
       await fetchPage(
         `https://www.hltv.org/search?term=${name}`,
-        config.loadPage
+        config.loadPage,
+        fetchOptions
       )
     )
     const pageContent = JSON.parse($('pre').text())
