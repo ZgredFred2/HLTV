@@ -169,8 +169,11 @@ export const getTeamStats =
           .text()
           .split(' - ')
 
+      // DD/MM/YY format
+      const dateStr =el.find('.time a').text()
+
         return {
-          date: getTimestamp(el.find('.time a').text()),
+          date: getTimestamp(dateStr),
           event: {
             id: Number(
               el
@@ -268,7 +271,8 @@ function getPlayersByContainer(container: HLTVPageElement) {
 }
 
 function getTimestamp(source: string): number {
-  const [day, month, year] = source.split('/')
+  const [day, month, yearStr] = source.split('/')
+  const year = "20"+yearStr
 
-  return new Date([month, day, year].join('/')).getTime()
+  return Date.UTC(+year, +month - 1, +day)
 }
