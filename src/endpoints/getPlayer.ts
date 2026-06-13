@@ -71,8 +71,9 @@ export const getPlayer =
     const age = $('.playerAge .listRight').textThen((x) =>
       parseNumber(x.split(' ')[0])
     )
-
-    const twitter = $('.twitter').parent().attr('href')
+    // TODO: extract to common handler shared with getTeam
+    // QUESTION: if button with class '.twitter' will wever appear after Twitter rebrand to X
+    const twitter = $('.twitter, .custom-x').parent().attr('href') 
     const twitch = $('.twitch').parent().attr('href')
     const facebook = $('.facebook').parent().attr('href')
     const instagram = $('.instagram').parent().attr('href')

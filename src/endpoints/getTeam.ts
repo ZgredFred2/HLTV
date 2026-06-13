@@ -46,8 +46,10 @@ export const getTeam =
     const name = $('.profile-team-name').text()
     const logoSrc = $('.teamlogo').attr('src')
     const logo = logoSrc.includes('placeholder.svg') ? undefined : logoSrc
+    // TODO: extract to common handler shared with getPlayer
     const facebook = $('.facebook').parent().attr('href')
-    const twitter = $('.twitter').parent().attr('href')
+    // QUESTION: if button with class '.twitter' will wever appear after Twitter rebrand to X
+    const twitter = $('.twitter, .custom-x').parent().attr('href')
     const instagram = $('.instagram').parent().attr('href')
     const rank = parseNumber(
       $('.profile-team-stat .right').first().text().replace('#', '')
