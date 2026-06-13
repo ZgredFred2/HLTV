@@ -45,7 +45,7 @@ export const getTeam =
 
     const name = $('.profile-team-name').text()
     const logoSrc = $('.teamlogo').attr('src')
-    const logo = logoSrc.includes('placeholder.svg') ? undefined : logoSrc
+    const logo = logoSrc.includes('placeholder') ? undefined : logoSrc
     // TODO: extract to common handler shared with getPlayer
     const facebook = $('.facebook').parent().attr('href')
     // QUESTION: if button with class '.twitter' will wever appear after Twitter rebrand to X
