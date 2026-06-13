@@ -25,6 +25,10 @@
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "setupFiles": ["./__tests__/setup.ts"],
+    "snapshotFormat": {
+      "escapeString": true,
+      "printBasicPrototype": true
+    },
     "moduleFileExtensions": [
       "ts",
       "tsx",
